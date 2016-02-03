@@ -34,6 +34,8 @@ class Code_Test < Minitest::Test
 
     guess = test_player.guess(test_code.code)
     assert_equal 4, test_code.check_colors(guess)
+    guess[3] == "G" ? incorrect_guess = guess.take(3) << "R" : incorrect_guess = guess.take(3) << "G"
+    assert_equal 3, test_code.check_colors(incorrect_guess)
   end
 
   def test_it_checks_position
