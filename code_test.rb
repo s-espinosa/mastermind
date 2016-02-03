@@ -1,5 +1,7 @@
 require 'minitest/autorun'
+require 'minitest/pride'
 require_relative 'code'
+require_relative 'player'
 
 class Code_Test < Minitest::Test
   def test_it_has_a_code
@@ -9,8 +11,9 @@ class Code_Test < Minitest::Test
 
   def test_it_returns_hashes_with_color_counts
     test_code = Code.new()
+    test_player = Player.new("George")
 
-    guess_array = ["R", "R", "R", "R"]
+    guess_array = test_player.guess("rrrr")
     guess_hash = {"R" => 4, "G" => 0, "B" => 0, "Y" => 0}
     color_hash = test_code.how_many_by_color(guess_array)
     assert_equal guess_hash, color_hash
@@ -18,37 +21,34 @@ class Code_Test < Minitest::Test
 
   def test_it_checks_colors
     test_code = Code.new()
+    test_player = Player.new("George")
 
-    guess = "RGRY"
+    guess = test_player.guess("RGRY")
     position_result = test_code.check_colors(guess)
     assert_includes 0..4, position_result
   end
 
   def test_it_identifies_all_correct_colors
     test_code = Code.new()
+    test_player = Player.new("George")
 
-    guess = test_code.code
-    assert_equal 4, test_code.check_colors(guess)
-  end
-
-  def test_it_identifies_all_correct_colors_regardless_of_case
-    test_code = Code.new()
-
-    guess = test_code.code.downcase
+    guess = test_player.guess(test_code.code)
     assert_equal 4, test_code.check_colors(guess)
   end
 
   def test_it_checks_position
     test_code = Code.new()
+    test_player = Player.new("George")
 
-    position_result = test_code.check_position("RGYB")
+    position_result = test_code.check_position(test_player.guess("RGYB"))
     assert_includes 0..4, position_result
   end
 
   def test_it_identifies_all_correct_positions
     test_code = Code.new()
+    test_player = Player.new("George")
 
-    guess = test_code.code
+    guess = test_player.guess(test_code.code)
     assert_equal 4, test_code.check_position(guess)
   end
 end

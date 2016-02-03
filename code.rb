@@ -19,8 +19,7 @@ class Code
   end
 
 
-  def check_colors(guess)
-    guess_array = guess.upcase.split("")
+  def check_colors(guess_array)
     code_hash = how_many_by_color(@code_array)
     guess_hash = how_many_by_color(guess_array)
 
@@ -33,12 +32,12 @@ class Code
     total_right = 4 - total_wrong
   end
 
-  def check_position(guess)
-    @guess_array = guess.upcase.split("")
+
+  def check_position(guess_array)
     correct_position = 0
 
     @code_array.each_with_index do |color, index|
-      correct_position += 1 if @guess_array[index] == color
+      correct_position += 1 if guess_array[index] == color
     end
 
     correct_position
