@@ -8,7 +8,7 @@ module Play
     #new_game = Game.new
     puts "Please enter your name:"
     player_name = gets.chomp
-    #player = Player.new(player_name)
+    player = Player.new(player_name)
 
     play_again = true
     until play_again == false
