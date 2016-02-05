@@ -7,13 +7,13 @@ module Play
     puts "Please enter your name:"
     player_name = gets.chomp
     player = Player.new(player_name)
-    new_game = Game.new(player)
+    game = Game.new(player)
 
 
     play_again = true
     until play_again == false
-      new_game.short_instructions
-      new_game.take_turn
+      game.short_instructions
+      game.take_turn
 
       acceptable = false
       until acceptable == true
