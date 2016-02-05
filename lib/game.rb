@@ -11,22 +11,19 @@ class Game
     @player = player
   end
 
-
   def short_instructions
     puts "I have generated a beginner sequence with four elements made up of: (r)ed,(g)reen, (b)lue, and (y)ellow.\nUse (q)uit at any time to end the game."
   end
 
-
   def take_turn
     puts "Please enter your guess"
-    guess = gets.chomp
-
+    guess = gets.chomp.downcase
 
     if guess == "c"
       puts @secret_code.code
       take_turn
     elsif guess == "q"
-      #quit
+      abort
     elsif guess.length == 4
       check_guess(guess)
     else
@@ -34,7 +31,6 @@ class Game
       take_turn
     end
   end
-
 
   def check_guess(guess)
     colors_right = @secret_code.check_colors(@player.guess(guess))
@@ -51,6 +47,13 @@ class Game
     end
   end
 
+  def time_finished
+    @time_end = Time.new
+  end
+
+  def time_to_play
+    @time_end - @time_start
+  end
 
   def play_again
     puts "Would you like to play again? (y/n)"
@@ -66,14 +69,4 @@ class Game
       play_again
     end
   end
-
-
-  def time_finished
-    @time_end = Time.new
-  end
-
-  def time_to_play
-    @time_end - @time_start
-  end
-
 end
