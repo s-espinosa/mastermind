@@ -1,6 +1,5 @@
 require_relative 'code'
 require_relative 'player'
-require 'pry'
 
 
 class Game
