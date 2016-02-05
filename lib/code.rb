@@ -5,7 +5,16 @@ class Code
     @code = @code_array.join
   end
 
-  attr_reader :code
+  attr_reader :code, :color_choices
+
+  def valid_colors?(guess_array)
+    valid_array = true
+    uniq_array = guess_array.uniq
+    uniq_array.each do |color|
+      valid_array = false if !@color_choices.include?(color)
+    end
+    valid_array
+  end
 
   def check_colors(guess_array)
     code_hash = how_many_by_color(@code_array)
