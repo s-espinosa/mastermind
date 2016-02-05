@@ -23,8 +23,19 @@ class Game
       take_turn
     elsif guess == "q"
       abort
-    elsif guess.length == 4
-      check_guess(guess)
+    elsif guess.length > @secret_code.code.length
+      puts "That guess is too long. Please enter a guess #{@secret_code.code.length} characters long or (q)."
+      take_turn
+    elsif guess.length < @secret_code.code.length
+      puts "That guess is too short. Please enter a guess #{@secret_code.code.length} characters long or (q)."
+      take_turn
+    elsif guess.length == @secret_code.code.length
+      if @secret_code.valid_colors?(@player.guess(guess))
+        check_guess(guess)
+      else
+        puts "Please enter a valid guess using #{@secret_code.color_choices.join(", ")}, or (q)"
+        take_turn
+      end
     else
       puts "Please enter a valid guess or (q)"
       take_turn
