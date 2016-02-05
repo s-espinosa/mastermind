@@ -15,7 +15,7 @@ class Game
   end
 
   def take_turn
-    puts "Please enter your guess"
+    puts "Please enter your guess."
     guess = gets.chomp.downcase
 
     if guess == "c"
@@ -48,7 +48,8 @@ class Game
     @player.number_of_turns += 1
 
     if colors_right == 4 && positions_right == 4
-      puts "Congratulations! That's correct!"
+      time_finished
+      puts "Congratulations! You guessed the sequence '#{@secret_code.code}' in #{@player.number_of_turns} guesses over " + time_to_play
       @player.number_of_turns = 0
       play_again
     else
@@ -62,7 +63,17 @@ class Game
   end
 
   def time_to_play
-    @time_end - @time_start
+    time_taken = (@time_end - @time_start).to_i
+    if time_taken < 60
+      "#{time_taken} seconds."
+    elsif time_taken < 120
+      seconds = time_taken % 60
+      "1 minute, #{seconds} seconds."
+    else
+      minutes = time_taken / 60
+      seconds = time_taken % 60
+      "#{minutes} minutes, #{seconds} seconds."
+    end
   end
 
   def play_again
@@ -71,6 +82,8 @@ class Game
     if play_again == "y"
       short_instructions
       @secret_code = Code.new
+      @time_start = Time.new
+      @time_end = nil
       take_turn
     elsif play_again == "n"
       abort
