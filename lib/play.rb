@@ -4,16 +4,16 @@ require_relative 'player'
 module Play
 
   def self.start_game
-    puts "initializing game (get name and make code)"
-    #new_game = Game.new
     puts "Please enter your name:"
     player_name = gets.chomp
     player = Player.new(player_name)
+    new_game = Game.new(player)
+
 
     play_again = true
     until play_again == false
-      puts "playing game (giving guesses and responding)"
-      #new_game.play
+      new_game.short_instructions
+      new_game.take_turn
 
       acceptable = false
       until acceptable == true
