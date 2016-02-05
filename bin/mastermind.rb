@@ -18,7 +18,7 @@ until acceptable == true
     acceptable = true
   when "q"
     acceptable = true
-    #exit
+    abort
   when "i"
     Instructions.print_instructions
   else
