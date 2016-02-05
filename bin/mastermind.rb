@@ -1,6 +1,5 @@
 require_relative '../lib/play'
 require_relative '../lib/instructions'
-require_relative '../lib/game'
 require_relative '../lib/clean_text'
 
 
