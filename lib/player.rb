@@ -1,11 +1,10 @@
 class Player
-  def initialize(name)
-    @name = name.capitalize
+  def initialize
     @current_guess = []
     @number_of_turns = 0
   end
 
-  attr_reader :name, :current_guess
+  attr_reader :current_guess
   attr_accessor :number_of_turns
 
   def guess(guess_string)
