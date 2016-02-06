@@ -1,9 +1,9 @@
 require_relative '../lib/play'
-require_relative '../lib/instructions'
+require_relative '../lib/print_text'
 require_relative '../lib/clean_text'
 
 
-puts "Welcome to MASTERMIND\n"
+PrintText.intro
 
 acceptable = false
 until acceptable == true
@@ -19,7 +19,7 @@ until acceptable == true
     acceptable = true
     abort
   when "i"
-    Instructions.print_instructions
+    PrintText.long_instructions
   else
     puts "Sorry, that's not an option."
   end

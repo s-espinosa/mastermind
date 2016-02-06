@@ -1,5 +1,6 @@
 require_relative 'code'
 require_relative 'player'
+require_relative 'print_text'
 
 
 class Game
@@ -8,10 +9,6 @@ class Game
     @time_end = nil
     @secret_code = Code.new
     @player = player
-  end
-
-  def short_instructions
-    puts "I have generated a beginner sequence with four elements made up of: (r)ed,(g)reen, (b)lue, and (y)ellow.\nUse (q)uit at any time to end the game."
   end
 
   def take_turn
@@ -80,7 +77,7 @@ class Game
     puts "Would you like to play again? (y/n)"
     play_again = CleanText.getsmall
     if play_again == "y"
-      short_instructions
+      PrintText.short_instructions
       @secret_code = Code.new
       @time_start = Time.new
       @time_end = nil

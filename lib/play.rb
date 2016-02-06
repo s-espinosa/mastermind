@@ -1,5 +1,6 @@
 require_relative 'game'
 require_relative 'player'
+require_relative 'print_text'
 
 module Play
 
@@ -12,7 +13,7 @@ module Play
 
     play_again = true
     until play_again == false
-      game.short_instructions
+      PrintText.short_instructions
       game.take_turn
 
       acceptable = false
