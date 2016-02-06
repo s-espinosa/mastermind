@@ -3,14 +3,6 @@ require_relative 'player'
 require_relative 'print_text'
 
 module Play
-
-  # def self.get_name
-  #   puts "Please enter your name:"
-  #   player_name = gets.chomp
-  #   player = Player.new(player_name)
-  #   start_game(player)
-  # end
-
   def self.start_game
     game = Game.new(Player.new)
     PrintText.short_instructions
@@ -26,7 +18,6 @@ module Play
     check_play_again(play_again)
   end
 
-
   def self.check_play_again(play_again)
     if play_again == "y"
       start_game
@@ -37,5 +28,4 @@ module Play
       ask_play_again
     end
   end
-
 end
