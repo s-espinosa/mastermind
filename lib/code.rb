@@ -17,15 +17,17 @@ class Code
   end
 
   def check_colors(guess_array)
-    code_hash = how_many_by_color(@code_array)
-    guess_hash = how_many_by_color(guess_array)
-
     total_wrong = 0
 
     @color_choices.each do |color|
-      color_difference = code_hash[color] - guess_hash[color]
+      count_code = @code_array.find_all{|code_color| color == code_color}.length
+      count_guess = guess_array.find_all{|guess_color| color == guess_color}.length
+
+      color_difference = count_code - count_guess
+
       total_wrong += color_difference if color_difference < 0
     end
+
     total_right = @color_choices.length + total_wrong
   end
 
@@ -36,16 +38,5 @@ class Code
       correct_position += 1 if guess_array[index] == color
     end
     correct_position
-  end
-
-  def how_many_by_color(color_array)
-    color_hash = {}
-    @color_choices.each do |color|
-      color_hash[color] = 0
-    end
-    color_array.each do |color|
-        color_hash[color] += 1
-    end
-    color_hash
   end
 end
