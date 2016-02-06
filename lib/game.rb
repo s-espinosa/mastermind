@@ -55,6 +55,23 @@ class Game
     end
   end
 
+  def play_again
+    puts "Would you like to play again? (y/n)"
+    play_again = CleanText.getsmall
+    if play_again == "y"
+      PrintText.short_instructions
+      @secret_code = Code.new
+      @time_start = Time.new
+      @time_end = nil
+      take_turn
+    elsif play_again == "n"
+      abort
+    else
+      puts "Sorry, that's not an option."
+      play_again
+    end
+  end
+
   def time_finished
     @time_end = Time.new
   end
@@ -70,23 +87,6 @@ class Game
       minutes = time_taken / 60
       seconds = time_taken % 60
       "#{minutes} minutes, #{seconds} seconds."
-    end
-  end
-
-  def play_again
-    puts "Would you like to play again? (y/n)"
-    play_again = CleanText.getsmall
-    if play_again == "y"
-      PrintText.short_instructions
-      @secret_code = Code.new
-      @time_start = Time.new
-      @time_end = nil
-      take_turn
-    elsif play_again == "n"
-      abort
-    else
-      puts "Sorry, that's not an option."
-      play_again
     end
   end
 end
