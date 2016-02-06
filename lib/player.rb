@@ -8,6 +8,6 @@ class Player
   attr_accessor :number_of_turns
 
   def guess(guess_string)
-    @current_guess = guess_string.upcase.split("")
+    @current_guess = guess_string.split("")
   end
 end
