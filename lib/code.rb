@@ -26,7 +26,7 @@ class Code
       color_difference = code_hash[color] - guess_hash[color]
       total_wrong += color_difference if color_difference < 0
     end
-    total_right = 4 + total_wrong
+    total_right = @color_choices.length + total_wrong
   end
 
   def check_position(guess_array)
