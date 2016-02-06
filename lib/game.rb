@@ -1,6 +1,7 @@
 require_relative 'code'
 require_relative 'player'
 require_relative 'print_text'
+require_relative 'play'
 
 
 class Game
@@ -48,27 +49,10 @@ class Game
       time_finished
       puts "Congratulations! You guessed the sequence '#{@secret_code.code}' in #{@player.number_of_turns} guesses over " + time_to_play
       @player.number_of_turns = 0
-      play_again
+      Play.ask_play_again
     else
       puts "'#{@player.current_guess.join}' has #{colors_right} of the correct elements with #{positions_right} in the correct positions.\nYou've taken #{@player.number_of_turns} guess."
       take_turn
-    end
-  end
-
-  def play_again
-    puts "Would you like to play again? (y/n)"
-    play_again = CleanText.getsmall
-    if play_again == "y"
-      PrintText.short_instructions
-      @secret_code = Code.new
-      @time_start = Time.new
-      @time_end = nil
-      take_turn
-    elsif play_again == "n"
-      abort
-    else
-      puts "Sorry, that's not an option."
-      play_again
     end
   end
 
