@@ -18,11 +18,9 @@ class Code
 
   def check_colors(guess_array)
     total_wrong = 0
-
     @color_choices.each do |color|
       count_code = @code_array.find_all{|code_color| color == code_color}.length
       count_guess = guess_array.find_all{|guess_color| color == guess_color}.length
-
       color_difference = count_code - count_guess
 
       total_wrong += color_difference if color_difference < 0
@@ -33,7 +31,6 @@ class Code
 
   def check_position(guess_array)
     correct_position = 0
-
     @code_array.each_with_index do |color, index|
       correct_position += 1 if guess_array[index] == color
     end
