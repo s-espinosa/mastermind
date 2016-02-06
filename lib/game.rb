@@ -13,29 +13,49 @@ class Game
   end
 
   def take_turn
-    puts "Please enter your guess."
-    guess = gets.chomp.downcase
+    guess = get_guess
+    check_length(guess)
+  end
 
-    if guess == "c"
+  def get_guess
+    puts "Please enter your guess."
+    guess = gets.chomp.upcase
+  end
+
+  def check_length(guess)
+    if guess.length == 1
+      singlets(guess)
+    elsif guess.length != @secret_code.code.length
+      wrong_length(guess.length)
+    else
+      correct_length(guess)
+    end
+  end
+
+  def singlets(guess)
+    abort if guess == "Q"
+    if guess == "C"
       puts @secret_code.code
-      take_turn
-    elsif guess == "q"
-      abort
-    elsif guess.length > @secret_code.code.length
-      puts "That guess is too long. Please enter a guess #{@secret_code.code.length} characters long or (q)."
-      take_turn
-    elsif guess.length < @secret_code.code.length
-      puts "That guess is too short. Please enter a guess #{@secret_code.code.length} characters long or (q)."
-      take_turn
-    elsif guess.length == @secret_code.code.length
-      if @secret_code.valid_colors?(@player.guess(guess))
-        check_guess(guess)
-      else
-        puts "Please enter a valid guess using #{@secret_code.color_choices.join(", ")}, or (q)"
-        take_turn
-      end
     else
       puts "Please enter a valid guess or (q)"
+    end
+    take_turn
+  end
+
+  def wrong_length(length)
+    if length > @secret_code.code.length
+      puts "That guess is too long. Please enter a guess #{@secret_code.code.length} characters long or (q)."
+    elsif length < @secret_code.code.length
+      puts "That guess is too short. Please enter a guess #{@secret_code.code.length} characters long or (q)."
+    end
+    take_turn
+  end
+
+  def correct_length(guess)
+    if @secret_code.valid_colors?(@player.guess(guess))
+      check_guess(guess)
+    else
+      puts "Please enter a valid guess using #{@secret_code.color_choices.join(", ")}, or (q)"
       take_turn
     end
   end
@@ -46,14 +66,22 @@ class Game
     @player.number_of_turns += 1
 
     if colors_right == 4 && positions_right == 4
-      time_finished
-      puts "Congratulations! You guessed the sequence '#{@secret_code.code}' in #{@player.number_of_turns} guesses over " + time_to_play
-      @player.number_of_turns = 0
-      Play.ask_play_again
+      congrats
     else
-      puts "'#{@player.current_guess.join}' has #{colors_right} of the correct elements with #{positions_right} in the correct positions.\nYou've taken #{@player.number_of_turns} guess."
-      take_turn
+      try_again(colors_right, positions_right)
     end
+  end
+
+  def congrats
+    time_finished
+    puts "Congratulations! You guessed the sequence '#{@secret_code.code}' in #{@player.number_of_turns} guesses over " + time_to_play
+    @player.number_of_turns = 0
+    Play.ask_play_again
+  end
+
+  def try_again(colors_right, positions_right)
+    puts "'#{@player.current_guess.join}' has #{colors_right} of the correct elements with #{positions_right} in the correct positions.\nYou've taken #{@player.number_of_turns} guess."
+    take_turn
   end
 
   def time_finished
@@ -62,14 +90,11 @@ class Game
 
   def time_to_play
     time_taken = (@time_end - @time_start).to_i
-    if time_taken < 60
-      "#{time_taken} seconds."
-    elsif time_taken < 120
-      seconds = time_taken % 60
+    minutes, seconds = time_taken / 60, time_taken % 60
+
+    if time_taken > 60 && time_taken < 120
       "1 minute, #{seconds} seconds."
     else
-      minutes = time_taken / 60
-      seconds = time_taken % 60
       "#{minutes} minutes, #{seconds} seconds."
     end
   end
