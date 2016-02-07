@@ -5,10 +5,10 @@ require_relative 'play'
 
 
 class Game
-  def initialize(player)
+  def initialize(player, difficulty)
     @time_start = Time.new
     @time_end = nil
-    @secret_code = Code.new
+    @secret_code = Code.new(difficulty)
     @player = player
   end
 
@@ -65,7 +65,7 @@ class Game
     positions_right = @secret_code.check_position(@player.guess(guess))
     @player.number_of_turns += 1
 
-    if colors_right == 4 && positions_right == 4
+    if colors_right == @secret_code.code.length && positions_right == @secret_code.code.length
       congrats
     else
       try_again(colors_right, positions_right)
