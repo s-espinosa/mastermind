@@ -1,7 +1,12 @@
 class Code
-  def initialize
-    @color_choices = ["R", "G", "B", "Y"]
-    @code_array = [@color_choices.sample, @color_choices.sample, @color_choices.sample, @color_choices.sample]
+  def initialize(difficulty = "b")
+    @all_colors = ["R", "G", "B", "Y", "O", "P"]
+    @difficulty_hash = {"b" => [4, 4], "i" => [5, 6], "a" => [6, 8]}
+    @color_choices = @all_colors.take(@difficulty_hash[difficulty][0])
+    @code_array = [*1..@difficulty_hash[difficulty][1]].map{|n| @color_choices.sample}
+
+    #code_array = [@color_choices.sample, @color_choices.sample, @color_choices.sample, @color_choices.sample]
+
     @code = @code_array.join
   end
 
@@ -26,7 +31,7 @@ class Code
       total_wrong += color_difference if color_difference < 0
     end
 
-    total_right = @color_choices.length + total_wrong
+    total_right = @code_array.length + total_wrong
   end
 
   def check_position(guess_array)
