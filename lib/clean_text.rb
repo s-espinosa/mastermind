@@ -1,5 +1,10 @@
 module CleanText
   def self.getsmall
-    gets.chomp.split("").first.downcase
+    text = gets.chomp
+    if text == ""
+      ""
+    else
+      text.split("").first.downcase
+    end
   end
 end
