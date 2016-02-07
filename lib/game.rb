@@ -80,7 +80,8 @@ class Game
   end
 
   def try_again(colors_right, positions_right)
-    puts "'#{@player.current_guess.join}' has #{colors_right} of the correct elements with #{positions_right} in the correct positions.\nYou've taken #{@player.number_of_turns} guess."
+    puts "'#{@player.current_guess.join}' has #{colors_right} of the correct elements with #{positions_right} in the correct positions."
+    @player.number_of_turns == 1 ? puts("You've taken #{@player.number_of_turns} guess.") : puts("You've taken #{@player.number_of_turns} guesses.")
     take_turn
   end
 
