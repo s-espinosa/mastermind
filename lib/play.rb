@@ -7,7 +7,7 @@ module Play
   def self.start_game
     difficulty = ask_difficulty
     game = Game.new(Player.new, difficulty)
-    PrintText.short_instructions
+    PrintText.short_instructions(difficulty)
     game.take_turn
 
     ask_play_again
