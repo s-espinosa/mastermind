@@ -5,11 +5,11 @@ require_relative 'play'
 
 
 class Game
-  def initialize(player, difficulty)
+  def initialize(difficulty)
     @time_start = Time.new
     @time_end = nil
     @secret_code = Code.new(difficulty)
-    @player = player
+    @player = Player.new
   end
 
   def take_turn

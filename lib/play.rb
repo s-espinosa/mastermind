@@ -1,12 +1,11 @@
 require_relative 'game'
-require_relative 'player'
 require_relative 'print_text'
 require_relative 'clean_text'
 
 module Play
   def self.start_game
     difficulty = ask_difficulty
-    game = Game.new(Player.new, difficulty)
+    game = Game.new(difficulty)
     PrintText.short_instructions(difficulty)
     game.take_turn
 
