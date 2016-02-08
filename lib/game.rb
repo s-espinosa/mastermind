@@ -90,13 +90,17 @@ class Game
   end
 
   def time_to_play
-    time_taken = (@time_end - @time_start).to_i
-    minutes, seconds = time_taken / 60, time_taken % 60
+    minutes, seconds = minutes_seconds(@time_start, @time_end)
 
-    if time_taken > 60 && time_taken < 120
+    if minutes == 1
       "1 minute, #{seconds} seconds."
     else
       "#{minutes} minutes, #{seconds} seconds."
     end
+  end
+
+  def minutes_seconds (time_start, time_end)
+    time_taken = (time_end - time_start).to_i
+    min_sec_array = [time_taken / 60, time_taken % 60]
   end
 end
