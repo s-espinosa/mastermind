@@ -25,10 +25,4 @@ ___  ___  ___   _____ _____ ______________  ________ _   _______
     puts "\nI have generated a beginner sequence with #{count} elements made up of: #{colors}\n\nUse (q)uit at any time to end the game."
     puts "\n_______________________________________________________________________________________\n\n"
   end
-
-  def self.short_colors
-    color_string = ""
-    elements_string = ""
-
-  end
 end
